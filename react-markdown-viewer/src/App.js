@@ -1,26 +1,57 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+
 import './App.css';
+
+import axios from 'axios';
+import ReactMarkdown from 'react-markdown';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <MarkdownViewer />
     </div>
   );
 }
 
+class MarkdownViewer extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+       content: null,
+       urlGitHubFile: "https://bryantson.github.io/reactjs-tutorials/react-markdown-viewer/docs/walkthrough.md"
+    };
+  }
+
+  componentWillMount() {
+    
+    axios.get(this.state.urlGitHubFile)
+    .then(response => {
+       console.log("Success in fetching the file from " + this.state.urlGitHubFile);
+       this.setState({ content: response.data });
+    })
+    .catch(error => {
+       console.err("Error in fetching the file from " + this.state.urlGitHubFile);
+    });
+  }
+
+  render() {
+    const { urlGitHubFile, content } = this.state;
+
+    return (
+      <div>
+         <h3> Fetched from: </h3> { urlGitHubFile }
+         
+	 <hr />
+	 <p>
+	    <ReactMarkdown source={content} />
+	 </p>
+      </div>
+  )};
+    
+}
+
+
 export default App;
+
+
