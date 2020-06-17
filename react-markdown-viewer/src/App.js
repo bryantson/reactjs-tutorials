@@ -23,7 +23,7 @@ class MarkdownViewer extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     
     axios.get(this.state.urlGitHubFile)
     .then(response => {
