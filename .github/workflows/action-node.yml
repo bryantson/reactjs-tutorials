@@ -15,4 +15,3 @@ jobs:
         run: |
           cd react-test-componentdidupdate
           npm install
-          npm start
