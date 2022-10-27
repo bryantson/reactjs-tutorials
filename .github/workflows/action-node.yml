@@ -1,0 +1,15 @@
+name: Run node
+
+on:
+  workflow_dispatch:
+  
+  
+jobs:
+  RunNode:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test
+        run:
+          cd react-test-componentdidupdate
+          npm install
+          npm start
