@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Test
-        run:
+        run: |
           cd react-test-componentdidupdate
           npm install
           npm start
